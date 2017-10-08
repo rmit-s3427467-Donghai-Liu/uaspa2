@@ -24,18 +24,22 @@ user { 'becca':
         password_min_age => '0',
         home => '/home/becca',
         shell => '/bin/bash',
-        group => ['sysadmin','cars'],
+        groups => ['sysadmin','cars'],
+		managehome => true,
+		comment     => 'foo',
 }
 
 user { 'fred':
-	ensure => presnet,
+		ensure => present,
         uid => '10027467',
         password => '$1$KMnaguwy$Qbh6YHOW3vRoRVjEJzhSf0',
         password_max_age => '99999',
         password_min_age => '0',
-        home => 'home/fred',
-        groups => ['cars','truchs'],
+        home => '/home/fred',
+        groups => ['cars','trucks'],
         shell => '/bin/tcsh',
+		managehome => true,
+		comment     => 'foo',
 }
 
 user { 'wilma':
@@ -45,9 +49,33 @@ user { 'wilma':
         password_max_age => '99999',
         password_min_age => '0',
         home => '/home/wilma',
-        groups => ['trucks','cars','ambulances']
+        groups => ['trucks','cars','ambulances'],
+		managehome => true,
+		comment     => 'foo',
+}
+file { 'home/fred/' :
+		ensure => 'directory',
+		owner  => 'fred',
 
 }
+
+file { 'home/becca' :
+		ensure => 'directory',
+		owner  => 'becca',
+
+}
+
+file { 'home/wilma/' :
+		ensure => 'directory',
+		owner  => 'wilma',
+
+}
+file { 'home/wilma/.ssh' :
+		ensure => 'directory',
+		owner  => 'wilma',
+
+}
+
 
 ssh_authorized_key { 'wilma@sshkey.com':
   user => 'wilma',
