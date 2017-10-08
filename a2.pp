@@ -53,24 +53,24 @@ user { 'wilma':
 		managehome => true,
 		comment     => 'foo',
 }
-file { 'home/fred/' :
+file { '/home/fred' :
 		ensure => 'directory',
 		owner  => 'fred',
 
 }
 
-file { 'home/becca' :
+file { '/home/becca' :
 		ensure => 'directory',
 		owner  => 'becca',
 
 }
 
-file { 'home/wilma/' :
+file { '/home/wilma' :
 		ensure => 'directory',
 		owner  => 'wilma',
 
 }
-file { 'home/wilma/.ssh' :
+file { '/home/wilma/.ssh' :
 		ensure => 'directory',
 		owner  => 'wilma',
 
