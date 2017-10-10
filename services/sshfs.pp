@@ -1,6 +1,6 @@
 class sshfs {
 package { 'sshfs' :
-		ensure => present,
+		ensure => installed,
 }
     service { "sshfs":
         ensure    => running,

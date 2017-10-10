@@ -1,12 +1,22 @@
-
-
-class { 'apache':
-  default_vhost => false,
+class apache (String $version = 'latest') {
+  package {'httpd':
+    ensure => $version, 
+   
+  }
+  file {'/etc/httpd/httpd.conf':
+    ensure  => file,
+    owner   => 'root',
+    content => template('/etc/httpd/conf/httpd.conf'), 
+      }
+file_line { 'doucroot':
+  path  => '/etc/httpd/httpd.conf',
+  line  => "DoucumentRoot '/var/ww/s3427467'",
+  match => 'DoucumentRoot',
 }
-
-apache::vhost { 'user.example.com':
-  port          => '80',
-  docroot       => '/var/www/s3427467',
-  docroot_owner => 'www-data',
-  docroot_group => 'www-data',
+ 
+  service {'httpd':
+    ensure    => running,
+    enable    => true,
+    subscribe => File['/etc/httpd/httpd.conf'],
+  }
 }
