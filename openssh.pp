@@ -1,14 +1,18 @@
+#openssh service
 class openssh{
+package { "openssh-server":
+ensure => "installed",
+}
+#start service
+service { "sshd":
+ensure => running,
 
-  package { "openssh-server":
-      ensure => "installed",
-  }
-
-
+}
+#close root login 
 augeas { "sshd_config":
-  context => "/etc/ssh/sshd_config",
-    changes => [
-    "set PermitRootLogin no",
-  ],
- }
+context => "/etc/ssh/sshd_config",
+changes => [
+"set PermitRootLogin no",
+],
+}
 }
