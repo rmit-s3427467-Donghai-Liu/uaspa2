@@ -1,10 +1,9 @@
-class schedule {
-schedule { 'hourly':
-  period => hourly,
-  repeat => 3,
-}
+class schedule{
 
-exec { '/user/local/bin/puppet agent -t':
-  schedule => 'everyday',
+augeas { 'interval_time' :
+        context => '/etc/puppetlabs/puppet/puppet.conf',
+        changes => [
+                'set runiterval = 900',
+]
 }
 }

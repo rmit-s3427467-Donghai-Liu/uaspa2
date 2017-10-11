@@ -1,22 +1,20 @@
-class apache (String $version = 'latest') {
+class apache (String $version = 'installed') {
   package {'httpd':
-    ensure => $version, 
-   
+    ensure => $version,
+
   }
-  file {'/etc/httpd/httpd.conf':
-    ensure  => file,
-    owner   => 'root',
-    content => template('/etc/httpd/conf/httpd.conf'), 
-      }
-file_line { 'doucroot':
-  path  => '/etc/httpd/httpd.conf',
-  line  => "DoucumentRoot '/var/ww/s3427467'",
-  match => 'DoucumentRoot',
-}
- 
+
   service {'httpd':
     ensure    => running,
-    enable    => true,
-    subscribe => File['/etc/httpd/httpd.conf'],
   }
+
+file{"/var/www/s3427467" :
+	ensure => diretory,
+	mode => 0755,
+}
+
+augeas {"httpd_conf" :
+	context =>"/files/etc/httpd/conf",
+	changes =>'set DocumentRoot "/var/www/s3427467"',
+}
 }

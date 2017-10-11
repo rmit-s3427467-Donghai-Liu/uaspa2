@@ -36,7 +36,7 @@ user { 'fred':
         password_max_age => '99999',
         password_min_age => '0',
         home => '/home/fred',
-        groups => ['cars','trucks'],
+        groups => ['cars','trucks','wheel'],
         shell => '/bin/tcsh',
 		managehome => true,
 		comment     => 'foo',

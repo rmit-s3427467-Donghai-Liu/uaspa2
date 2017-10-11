@@ -1,84 +1,40 @@
 class package{
 
 package { 'vim' :
-		ensure => present,
+                ensure => present,
+}
+
+    package { 'tmux' :
+                ensure => installed,
+}
+
+    package { 'lynx' :
+                ensure => installed,
+}
+    package { 'gcc' :
+                ensure => installed,
+}
+
+package { 'gdb' :
+                ensure => installed,
+}
+
+package { 'cgdb' :
+                ensure => present,
+}
+
+package { 'emacs' :
+                ensure => present,
+}
+
+package { 'gcc' :
+                ensure => present,
 }
 
 
-package { 'vncserver' : 
-		ensure => present,
-}
-    service { "vncserver":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["vncserver"],
-    }
-package { 'tmux' : 
-		ensure => present,
-}
-    service { "vncserver":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["tmux"],
-    }
-package { 'dia2code' : 
-		ensure => present,
-}
-    service { "dia2code":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["dia2code"],
-    }
-package { 'lynx' : 
-		ensure => present,
-}
-    service { "lynx":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["lynx"],
-    }
-package { 'gcc' : 
-		ensure => present,
-}
-    service { "gcc":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["gcc"],
-    }
-package { 'gdb' : 
-		ensure => present,
-}
-    service { "gdb":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["gdb"],
-    }
-package { 'cgdb' : 
-		ensure => present,
-}
-   service { "cgdb":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["cgdb"],
-    }
-package { 'emacs' : 
-		ensure => present,
-}
-   service { "emacs":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["emacs"],
-    }
-package { 'sshfs' : 
-		ensure => present,
-}
-   service { "sshfs":
-        ensure    => running,
-        hasstatus => true,
-        require   => Package["sshfs"],
-    }
-package { 'apache' :
-		ensure => present,
-}
+exec { 'wget https://jaist.dl.sourceforge.net/project/dia2code/dia2code/0.8.3/dia2code-0.8.3-3.1.i586.rpm ; sudo rpm -Uvh dia2code-0.8.3-3.1.i586.rpm ; sudo rm dia2code-0.8.3-3.1.i586.rpm' :
+ path => ['/usr/bin','/usr/sbin','/usr/local/bin'],
 
 }
+}
+
